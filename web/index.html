@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Tipper</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+        <script>
+            function doAjaxPost() {
+                console.log('Trying to ajax post...');
+                var searchValue = $('#searchText').val();
+
+                $.ajax(
+                        {
+                            type: "POST",
+                            url: 'http://localhost:8080/tipper/',
+                            data: {searchText: searchValue},
+                            success: function (result)
+                            {
+                                $("#result").html(result);
+                            }
+                        });
+                console.log(searchValue);
+            }
+        </script>
+
+        <style>
+            .controlgroup-textinput{
+                padding-top:.22em;
+                padding-bottom:.22em;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!--PAGE ONE-->
+        <div data-role="page" id="pageone" data-theme="b">
+            <input type="hidden" name="user" value="">
+
+            <!--SEARCH-->     
+            <div data-role="header" data-mini="true">
+                <div data-role="fieldcontain">
+                    <input id="searchText" type="search" id="search-control-group" data-wrapper-class="controlgroup-textinput ui-btn ui-btn-b">
+                    <button onclick="doAjaxPost()" data-icon="search" data-iconpos="notext" data-theme="b">Search</button>
+                </div>
+            </div>
+            <!--END SEARCH-->
+
+            <div data-role="main" class="ui-content">
+                <div id="result">
+                    <a href="#pagetwo">Result1</a>
+                </div>
+            </div>
+
+        </div> 
+        <!--END PAGE ONE-->
+
+        <!--PAGE TWO-->
+        <div data-role="page" id="pagetwo" data-theme="b">
+            <div data-role="header">
+                <h1>Client Page</h1>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <a href="#" class="ui-btn ui-btn-b ui-mini ">Pay Tip</a>
+                <a href="#" class="ui-btn ui-btn-b ui-mini">Tip Box</a>
+            </div>
+
+        </div> 
+        <!--END PAGE TWO-->
+
+    </body>
+</html>
